@@ -1,0 +1,70 @@
+/*FLEXBOX*/
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3em 0 3em 0;
+    padding: 0;
+    flex-direction: column;
+}
+
+.flex-rows {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    width: 100%;
+    border: 1px solid #626262;
+    margin-top: -1px;
+}
+
+.flex-rows div {
+    width: 40%;
+    /*height: 20px;*/
+    text-align: center;
+    border-right: 1px solid #626262;
+}
+.flex-rows div:nth-child(3) {
+    width: 10%;
+}
+
+
+.flex-rows div:last-child {
+    border-right: none;
+    width: 10%;
+}
+
+.rowComplead {
+    background: greenyellow;
+}
+
+.doneButton {
+    cursor: pointer;
+    background-color: rgba(34, 145, 34, 0.66);
+    font-weight: bolder;
+    color: white;
+
+}
+
+.test {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.doneButton:hover {
+    background-color: #caff30;
+    color: #423f41;
+}
+
+.removeButton {
+    cursor: pointer;
+    background-color: rgb(247, 100, 88);
+    color: #423f41;
+    font-weight: bold;
+
+}
+
+.removeButton:hover {
+    background-color: #ff1c24;
+}

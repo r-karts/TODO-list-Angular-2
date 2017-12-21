@@ -1,0 +1,8 @@
+<div class="table flex-wrap">
+    <div *ngFor="let row of list; let i = index" [ngClass]="{rowComplead: row.check}" class="flex-rows">
+        <div>{{row.todo}}</div>
+        <div>{{row.date}}</div>
+        <div [ngClass]="{doneButton : true}" (click)='compleadCase(row)'>Done</div>
+        <div [ngClass]="{removeButton : true}" (click)='removeRow(i)'>remove</div>
+    </div>
+</div>

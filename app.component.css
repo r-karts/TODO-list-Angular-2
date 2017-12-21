@@ -1,0 +1,77 @@
+h2 {
+    margin: auto;
+    font-weight: 800;
+}
+
+p {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+input, button {
+    display: inline-block;
+}
+
+input.ng-touched.ng-invalid {
+    background: #fc7c77c9
+}
+
+input.ng-touched.ng-valid {
+    background: #cdf81f8a
+}
+
+.wrap-form {
+    border-radius: 10px;
+    margin: auto;
+    border: 1px solid #00aaff;
+    background: #b3e6ff;
+    padding: 50px;
+}
+
+input {
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.inputFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputFile + label {
+    margin-top: 10px;
+    text-decoration: none;
+    background: #fffcf9;
+    border-radius: 5px;
+    font-weight: 700;
+    color: rgba(0, 5, 73, 0.69);
+    border: 1px solid #4b59ff;
+    padding: 1px;
+}
+
+button {
+    margin-top: 10px;
+    text-decoration: none;
+    background: #fffcf9;
+    border-radius: 5px;
+    font-weight: 700;
+    color: rgba(0, 5, 73, 0.69);
+    border: 1px solid #4b59ff;
+}
+
+.submitForm {
+    text-decoration: none;
+    border: 1px solid #4b59ff;
+    border-radius: 10px;
+    font-weight: 700;
+    color: rgba(0, 5, 73, 0.69);
+    background-color: rgba(13, 215, 128, 0.68);
+    margin-left: 40px;
+    width: 100px;
+}
