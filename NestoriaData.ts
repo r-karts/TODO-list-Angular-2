@@ -1,44 +1,112 @@
 export class NestoriaData {
-
-
+    listings: Listing[];
+    constructor(list: Listing[]) {
+        this.listings = list;
+    }
 }
 
+// export class Listing {
 
-export class Listing {
 
-    bathroomNumber: number;
-    bedroomNumber: number;
-    carSpaces: number;
+    // bathroomNumber: number;
+    // bedroomNumber: number;
+    // carSpaces: number;
+    // commission: number;
+    // constructionYear: number;
+    //
+    // datasourceName: string;
+    // imgHeight: number;
+    // imgUrl: string;
+    // imgWidth: number;
+    // keywords: string;
+    // latitude: number;
+    // listerName: string;
+    // listerUrl: string;
+    // listingType: string;
+    // locationAccuracy: number;
+    // longitube: number;
+    // price: number;
+    // priceCurrency: string;
+    // priceFormatted: string;
+    // priceHigh: number;
+    // priceLow: number;
+    // propertyType: string;
+    // size: number;
+    // sizeType: string;
+    // summary: string;
+    // thumbHeight: number;
+    // thumbUrl: string;
+    // thumbWidth: number;
+    // title: string;
+    // updateInDays: number;
+    // updateInDaysFormatted: string;
+
+// }
+
+export interface Listing {
+    bathroom_number: any;
+    bedroom_number: number;
+    car_spaces: number;
     commission: number;
-    constructionYear: number;
-
-    datasourceName: string;
-    imgHeight: number;
-    imgUrl: string;
-    imgWidth: number;
+    construction_year: number;
+    datasource_name: string;
+    img_height: any;
+    img_url: string;
+    img_width: any;
     keywords: string;
     latitude: number;
-    listerName: string;
-    listerUrl: string;
-    listingType: string;
-    locationAccuracy: number;
-    longitube: number;
+    lister_name: string;
+    lister_url: string;
+    listing_type: string;
+    location_accuracy: number;
+    longitude: number;
     price: number;
-    priceCurrency: string;
-    priceFormatted: string;
-    priceHigh: number;
-    priceLow: number;
-    propertyType: string;
+    price_currency: string;
+    price_formatted: string;
+    price_high: number;
+    price_low: number;
+    property_type: string;
     size: number;
-    sizeType: string;
+    size_type: string;
     summary: string;
-    thumbHeight: number;
-    thumbUrl: string;
-    thumbWidth: number;
+    thumb_height: any;
+    thumb_url: string;
+    thumb_width: any;
     title: string;
-    updateInDays: number;
-    updateInDaysFormatted: string;
+    updated_in_days: number;
+    updated_in_days_formatted: string;
+}
 
+export interface RequestNestoria {
+    country: string;
+    pretty: string;
+    placeName : string;
+    listingType : string;
+    action : string;
+}
 
+export interface Attribution {
+    img_height: number;
+    img_url: string;
+    img_width: number;
+    link_to_img: string;
+}
 
+export interface Response {
+    application_response_code: string;
+    application_response_text: string;
+    attribution: Attribution;
+    created_http: string;
+    created_unix: number;
+    link_to_url: string;
+    listings: Listing[];
+    locations: Location[];
+    page: number;
+    sort: string;
+    status_code: string;
+    status_text: string;
+    thanks: string;
+    total_pages: number;
+    total_results: number;
+    _cu5t0mP434m_: string;
 }

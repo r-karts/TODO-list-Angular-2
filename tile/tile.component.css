@@ -1,0 +1,89 @@
+
+.wrap-tile-image {
+    width: 100%;
+    display: table-cell;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+
+}
+.description-side {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 21%,rgba(0,0,0,0.05) 24%,rgba(0,0,0,0.9) 74%,rgba(0,0,0,0.9) 100%);
+    padding: 4px;
+    height: 50%;
+}
+.prise-side {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 17%;
+    background-color: #443a3a;
+    padding: 0 4px;
+    color: #d2d2d2;
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+}
+.tile-title {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    top: 0;
+    width: 70%;
+    height: 17%;
+    background: whitesmoke;
+    color: #423f41;
+    font-size: 18px;
+    padding: 0 9px;
+    line-height: 27px;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+.tile-image {
+    height: 100%;
+    width : 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+/*.price {*/
+    /*float: left;*/
+    /*margin-bottom: 0;*/
+    /*margin-right: 6px;*/
+    /*background-color: #303237;*/
+    /*color: #fff;*/
+    /*opacity: .9;*/
+    /*-moz-border-radius: 3px;*/
+    /*border-radius: 3px;*/
+    /*position: relative;*/
+    /*display: inline-block;*/
+    /*font-size: .9em;*/
+    /*line-height: 22px;*/
+    /*font-weight: 500;*/
+/*}*/
+
+.text-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.text-wrap span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    font-weight: 600;
+}

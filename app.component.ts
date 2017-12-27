@@ -1,74 +1,35 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {TableComponent} from "./table.component";
-import {DataService} from "./data.service";
-
+import { Component } from '@angular/core';
+import { DataService } from './services/data.service';
+import { Listing, RequestNestoria } from './NestoriaData';
+import { FiltresService } from './services/filtres.service';
 @Component({
     selector: 'purchase-app',
     templateUrl: 'src/app/app.component.html',
     styleUrls: ['src/app/app.component.css'],
-    providers: [DataService]
-})
-export class AppComponent implements OnInit {
+    providers: [FiltresService]})                  // проблема была тут, надо всё нахер раскоментить
+export class AppComponent {
 
-    myForm: FormGroup;
-    todo: string;
-    date: string;
+    response: Response;
+    statusTable : boolean = false;
+    filterProp : RequestNestoria;
+    constructor (private filterService : FiltresService) {}
 
-    @ViewChild(TableComponent) private table: TableComponent;
+    // changeTable(filterProp:RequestNestoria) {
+        // this.filterProp = filterProp;
+        // this.filterService.setParams(this.filterProp).subscribe((resp: Response) => {
+            // this.response = resp['response'];
+            // this.listings = this.response['listings'];
+        // });
+    // }
 
-    submitRow() {
-        this.table.addRow(this.todo, this.date, false);
-    }
+    /*
+    * this.filterService.setParams(this.placeName, this.pretty,
+                                     this.action, this.listingType, this.country)
+            .subscribe((resp) => {
+                // this.response = <Response>resp['response'];
+                // this.listings = <Listing[]>this.response.listings;
 
-    constructor(private dataService: DataService, private builder: FormBuilder) {
-    }
-
-    ngOnInit() {
-        this.myForm = this.builder.group({
-            firstDiv: this.builder.group({
-                todo: [null, [Validators.required]],
-                date: [null, [Validators.required]]
-            })
-        });
-    }
-
-    downloadData() {
-        this.dataService.saveToFile(JSON.stringify(this.table));
-    }
-
-    uploadData(event: any) {
-
-
-    }
-
-    removeAllRow() {
-        this.table.clearList();
-    }
-
-    @ViewChild("file")
-    selectorFile: ElementRef;
-
-    userPasswordValidator(control: FormControl): { [s: string]: boolean } {
-
-        const password = control.value;
-        const regExp = new RegExp('^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$');
-
-        if (regExp.test(password)) {
-            return null;
-        }
-        return {'todo': true};
-    }
-
-    userEmailValidator(control: FormControl): { [s: string]: boolean } {
-
-        const password = control.value;
-        const regExp = new RegExp('^(([^<>()\\[\\]\\.,;:\\s@\\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\\]\\.,;:\\s@\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\"]{2,})$');
-
-        if (regExp.test(password)) {
-            return null;
-        }
-        return {'todo': true};
-    }
+            });
+    * */
 
 }

@@ -1,21 +1,8 @@
-<h1>Welcome</h1>
-<div class='wrap-form form'>
-    <form [formGroup]="myForm">
-        <div formGroupName="firstDiv">
-            <h2>TODO LIST</h2>
-            <p>Business - <input formControlName='todo' [(ngModel)]='todo'/>
-                Date - <input formControlName='date' type='date' [(ngModel)]='date'/>
-                <input class="submitForm" [disabled]='myForm.controls["firstDiv"].invalid' type="submit" value="Create"
-                       (click)="submitRow()"/></p>
-            <button (click)="downloadData()">Save data</button>
-            <input #file type="file" name="file" id="file" class="inputFile" (change)="uploadData($event)" placeholder="Upload file">
-            <label for="file">Select file</label>
-            <button (click)="removeAllRow()">Remove All</button>
-            <div *ngIf="(myForm.controls['firstDiv'].controls['todo'].invalid && myForm.controls['firstDiv'].controls['todo'].touched) ||
-                                (myForm.controls['firstDiv'].controls['date'].invalid && myForm.controls['firstDiv'].controls['date'].touched)">
-                <h3>Error, please check the form</h3>
-            </div>
-        </div>
-    </form>
-    <table-comp></table-comp>
-</div>
+<header>
+    <section class="top-side">HOUSES FOR SALE</section>
+    <section class="bottom-side">
+        <filter-comp (onChanged)="changeTable($event)"></filter-comp>
+    </section>
+</header>
+<table-comp   [hidden] = !statusTable></table-comp>
+<!--<div [hidden]=statusTable >Check the form of the filter to start</div>-->
