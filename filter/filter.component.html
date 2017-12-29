@@ -1,7 +1,9 @@
 <div class="wrap-search">
     <div class="filters">
-        <input type="text" class="place-filter" placeholder="Country" [(ngModel)] = country>
-        <input type="text" class="place-filter" placeholder="place" [(ngModel)] = placeName>
+        <label for="country">Country</label>
+        <input type="text" class="place-filter" placeholder="country" [(ngModel)] = country id="country">
+        <label for="place">Place</label>
+        <input type="text" class="place-filter" placeholder="place" [(ngModel)] = placeName id="place">
         <button class="apply-filter" (click)="applyFilter()" >Apply</button>
     </div>
 </div>

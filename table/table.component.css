@@ -14,7 +14,7 @@
     height: 300px;
     position: relative;
     margin-top: 1em;
-    box-shadow: 0px 0px 65px -9px rgba(0,0,0,0.69);
+    box-shadow: 0 0 34px -8px rgba(0,0,0,0.69);
 }
 
 .flex-rows div {

@@ -1,0 +1,22 @@
+.inLine {
+    display: inline-block;
+    border-right: 1px solid #443a3a;
+    background: white;
+    text-align: center;
+    width: 20%;
+}
+.inLine:last-child {
+    border-right: none;
+}
+
+.current {
+    color: red;
+}
+
+.wrap-list-of-pages {
+    position: relative;
+    background: whitesmoke;
+    border: 1px solid #443a3a;
+    margin: auto;
+    width: 200px;
+}

@@ -1,47 +1,10 @@
-export class NestoriaData {
-    listings: Listing[];
-    constructor(list: Listing[]) {
-        this.listings = list;
-    }
-}
-
-// export class Listing {
-
-
-    // bathroomNumber: number;
-    // bedroomNumber: number;
-    // carSpaces: number;
-    // commission: number;
-    // constructionYear: number;
-    //
-    // datasourceName: string;
-    // imgHeight: number;
-    // imgUrl: string;
-    // imgWidth: number;
-    // keywords: string;
-    // latitude: number;
-    // listerName: string;
-    // listerUrl: string;
-    // listingType: string;
-    // locationAccuracy: number;
-    // longitube: number;
-    // price: number;
-    // priceCurrency: string;
-    // priceFormatted: string;
-    // priceHigh: number;
-    // priceLow: number;
-    // propertyType: string;
-    // size: number;
-    // sizeType: string;
-    // summary: string;
-    // thumbHeight: number;
-    // thumbUrl: string;
-    // thumbWidth: number;
-    // title: string;
-    // updateInDays: number;
-    // updateInDaysFormatted: string;
-
+// export class NestoriaData {
+//     listings: Listing[];
+//     constructor(list: Listing[]) {
+//         this.listings = list;
+//     }
 // }
+
 
 export interface Listing {
     bathroom_number: any;
@@ -77,12 +40,35 @@ export interface Listing {
     updated_in_days_formatted: string;
 }
 
-export interface RequestNestoria {
+export interface INestoria {
+    request : IDataRequest;
+    response : IDataResponse;
+}
+
+export interface IDataRequest {
     country: string;
     pretty: string;
     placeName : string;
     listingType : string;
     action : string;
+    page : string;
+}
+
+export class DataRequest implements IDataRequest {
+    country: string;
+    pretty: string;
+    placeName : string;
+    listingType : string;
+    action : string;
+    page : string;
+    constructor() {
+        this.country = '';
+        this.action = '';
+        this.placeName = '';
+        this.listingType = '';
+        this.pretty = '';
+        this.page = '';
+    }
 }
 
 export interface Attribution {
@@ -92,7 +78,7 @@ export interface Attribution {
     link_to_img: string;
 }
 
-export interface Response {
+export interface IDataResponse {
     application_response_code: string;
     application_response_text: string;
     attribution: Attribution;

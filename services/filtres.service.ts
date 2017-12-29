@@ -1,26 +1,23 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { HttpParams } from '@angular/common/http';
-import { RequestNestoria } from '../NestoriaData';
-// import {Listing, Response} from "../NestoriaData";
+import { IDataRequest } from '../NestoriaData';
 
 @Injectable()
-export class FiltresService {
+export class FilterService {
 
-    // constructor(private dataService : DataService) {}
-    // place : string, pretty: number,
-    // action: string, listingType: string, country: string
-    // filterProp : RequestNestoria;
-    // setParams(filterProp : RequestNestoria) {
-    //     this.filterProp = filterProp;
-    //     const params = new HttpParams()
-    //         .set('place_name', this.filterProp.placeName)
-    //         .set('pretty', this.filterProp.pretty)
-    //         .set('action', this.filterProp.action)
-    //         .set('listing_type', this.filterProp.listingType)
-    //         .set('country', this.filterProp.country);
-    //     return this.dataService.requestData(params);
-    // }
+    constructor(private dataService : DataService) {}
+
+    setParams(filterProp : IDataRequest) {
+        const params = new HttpParams()
+            .set('place_name', filterProp.placeName)
+            .set('pretty', filterProp.pretty)
+            .set('action', filterProp.action)
+            .set('listing_type', filterProp.listingType)
+            .set('country', filterProp.country)
+            .set('page', filterProp.page);
+        return this.dataService.requestData(params);
+    }
 
 
 }

@@ -1,8 +1,15 @@
-<header>
-    <section class="top-side">HOUSES FOR SALE</section>
-    <section class="bottom-side">
-        <filter-comp (onChanged)="changeTable($event)"></filter-comp>
-    </section>
-</header>
-<table-comp   [hidden] = !statusTable></table-comp>
-<!--<div [hidden]=statusTable >Check the form of the filter to start</div>-->
+<div class="wrap-app">
+    <header>
+        <section class="top-side">HOUSES FOR SALE</section>
+        <section class="bottom-side">
+            <filter-comp (onChanged)="changeTable($event)"></filter-comp>
+        </section>
+    </header>
+    <!--<list-of-page (onChanged)="changePage($event)"></list-of-page>-->
+    <table-comp [listings]=listings *ngIf="statusTable"></table-comp>
+    <!--<list-of-page (onChanged)="changePage($event)"></list-of-page>-->
+    <div class="filter-popup" *ngIf="!statusTable && !networkProblem && !showLoading">Nothing found on your request
+    </div>
+    <div class="filter-popup" *ngIf=showLoading>Loading</div>
+    <div class="filter-popup" *ngIf="networkProblem  && !showLoading">Network problem</div>
+</div>

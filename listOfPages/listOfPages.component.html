@@ -1,0 +1,8 @@
+<div class="wrap-list-of-pages">
+    <div *ngFor="let item of listCurrentPages" [id]="item" (click)="clickOnPage(item)" class="inLine">
+        <div *ngIf="item != currentPage; else simple">{{item}}</div>
+        <ng-template #simple>
+            <div class="current">{{item}}</div>
+        </ng-template>
+    </div>
+</div>

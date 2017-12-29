@@ -1,35 +1,55 @@
 import { Component } from '@angular/core';
-import { DataService } from './services/data.service';
-import { Listing, RequestNestoria } from './NestoriaData';
-import { FiltresService } from './services/filtres.service';
+import { FilterService } from './services/filtres.service';
+import { Listing, IDataRequest, IDataResponse, INestoria } from './NestoriaData';
+
 @Component({
     selector: 'purchase-app',
     templateUrl: 'src/app/app.component.html',
-    styleUrls: ['src/app/app.component.css'],
-    providers: [FiltresService]})                  // проблема была тут, надо всё нахер раскоментить
+    styleUrls: ['src/app/app.component.css']})
 export class AppComponent {
 
-    response: Response;
-    statusTable : boolean = false;
-    filterProp : RequestNestoria;
-    constructor (private filterService : FiltresService) {}
+    showLoading : boolean = false;
+    statusTable : boolean = true;
+    networkProblem : boolean = false;
+    currentPage : number = 0;
+    listings: Listing[];
+    filterProp: IDataRequest;
 
-    // changeTable(filterProp:RequestNestoria) {
-        // this.filterProp = filterProp;
-        // this.filterService.setParams(this.filterProp).subscribe((resp: Response) => {
-            // this.response = resp['response'];
-            // this.listings = this.response['listings'];
-        // });
-    // }
 
-    /*
-    * this.filterService.setParams(this.placeName, this.pretty,
-                                     this.action, this.listingType, this.country)
-            .subscribe((resp) => {
-                // this.response = <Response>resp['response'];
-                // this.listings = <Listing[]>this.response.listings;
+    constructor (private filterService : FilterService) {
 
-            });
-    * */
+    }
 
+    changeTable(filterProp:IDataRequest) {
+        this.showLoading = true;
+        this.filterProp = filterProp;
+        this.filterService.setParams(filterProp).map((data: INestoria) => data.response)
+            .subscribe((resp: IDataResponse) => {
+                this.showLoading = false;
+                this.listings = resp.listings;
+                this.statusTable = this.listings.length > 0;
+                this.networkProblem = false;
+            },
+                       () => {
+                           this.statusTable = false;
+                           this.showLoading = false;
+                           this.networkProblem = true;
+                       });
+    }
+    changePage(currentPage: number) {
+        this.filterProp.page = currentPage.toString();
+        this.currentPage = currentPage;
+        this.filterService.setParams(this.filterProp).map((data: INestoria) => data.response)
+            .subscribe((resp: IDataResponse) => {
+                this.showLoading = false;
+                this.listings = resp.listings;
+                this.statusTable = this.listings.length > 0;
+                this.networkProblem = false;
+            },
+                       () => {
+                           this.statusTable = false;
+                           this.showLoading = false;
+                           this.networkProblem = true;
+                       });
+    }
 }

@@ -1,9 +1,8 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+.wrap-app {
+    background: url(https://www.bypeople.com/wp-content/uploads/2015/05/css-gradient-background.png) no-repeat fixed;
+    background-size: 100% 100%;
+    width : 100%;
     height: 100%;
-
 }
 
 .filter_container {
@@ -26,11 +25,11 @@ header {
     top: 0;
     left: 0;
     text-align: center;
-
-    color: #423f41;
+    text-shadow: 2px 2px #1c6686;
+    color: #ffffff;
     font-weight: 100;
     font-size: 40px;
-    border-bottom: 3px solid #ff4250;
+    border-bottom: 3px solid #1c6686;
 }
 .bottom-side {
     position: absolute;
@@ -124,4 +123,21 @@ button {
     background-color: rgba(13, 215, 128, 0.68);
     margin-left: 40px;
     width: 100px;
+}
+
+.filter-popup {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    vertical-align: middle;
+    color: #423f41;
+    font-weight: 900;
+    z-index: 10;
+    padding-top: 40px;
+    font-size: 20px;
+    margin-left: -100px;
+    margin-top: -50px;
 }
