@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { DataRequest } from '../NestoriaData';
 
 @Component({
     selector: 'list-of-page',
@@ -18,24 +19,41 @@ export class ListOfPages implements OnInit {
     margin: number = 2;
     lengthList: number = 5;
 
+    private id: number;
+    private querySubscription: Subscription;
+    private queryParam : any;
 
-    constructor(public subject : any) {
+    constructor(
+        private activateRoute: ActivatedRoute,
+        private router: Router) {
         this.listCurrentPages = [];
-        this.subject = new Subject();
+
+        this.querySubscription = activateRoute.queryParams.subscribe(
+            (queryParam: any) => {
+                this.queryParam = queryParam;
+            });
     }
 
     ngOnInit() {
         this.rangeFill(1, this.lengthList);
+
+        // this.activateRoute.params.subscribe(
+        //     (params: any) => {
+        //         this.id = params['id'];
+        //         console.log(this.id + ' <--');
+        //     });
     }
 
     @Output() onChanged = new EventEmitter<{}>();
 
-    clickOnPage(num : number) {
-        // this.subject.subscribe({
-        //     next : (value:any) => console.log(value)});
-        // this.subject.next(99);
-        return { num };
+    clickOnPage(num: number) {
+        this.router.navigate(['/page', num],
+            {
+                queryParams: this.queryParam,
+            });
+        // console.log(this.queryParam);
     }
+
 // делать через параметр в строке обновление листов строк или через сабджект
     setPosition(position: number) {
         this.currentPage = position;
@@ -63,6 +81,4 @@ export class ListOfPages implements OnInit {
             this.listCurrentPages.push(i);
         }
     }
-
-
 }

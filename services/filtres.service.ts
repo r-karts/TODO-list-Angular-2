@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { HttpParams } from '@angular/common/http';
-import { IDataRequest } from '../NestoriaData';
+import {DataRequest, IDataRequest} from '../NestoriaData';
 
 @Injectable()
 export class FilterService {
 
     constructor(private dataService : DataService) {}
 
-    setParams(filterProp : IDataRequest) {
+    setParams(filterProp : DataRequest) {
         const params = new HttpParams()
             .set('place_name', filterProp.placeName)
             .set('pretty', filterProp.pretty)

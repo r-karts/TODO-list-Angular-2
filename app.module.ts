@@ -9,10 +9,17 @@ import { FilterComponent } from './filter/filter.component';
 import { DataService } from './services/data.service';
 import { FilterService } from './services/filtres.service';
 import { ListOfPages } from './listOfPages/listOfPages.component';
+import { RouterModule, Routes } from '@angular/router';
+import { MainContentComponent } from  './content/main-content.component';
+
+const appRoutes : Routes = [
+    { path : 'page/:id', component: TableComponent }];
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule],
-    declarations: [AppComponent, TableComponent, TileComponent, FilterComponent, ListOfPages],
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule,
+        HttpClientModule, RouterModule.forRoot(appRoutes)],
+    declarations: [AppComponent, MainContentComponent, TableComponent,
+        TileComponent, FilterComponent, ListOfPages],
     providers : [DataService, FilterService],
     bootstrap: [AppComponent]})
 export class AppModule {

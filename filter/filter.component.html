@@ -4,6 +4,9 @@
         <input type="text" class="place-filter" placeholder="country" [(ngModel)] = country id="country">
         <label for="place">Place</label>
         <input type="text" class="place-filter" placeholder="place" [(ngModel)] = placeName id="place">
-        <button class="apply-filter" (click)="applyFilter()" >Apply</button>
+        <button class="apply-filter" [routerLink]="['page', '1']" [queryParams]="{'pretty': pretty, 'action': action, 'placeName': placeName,
+                                                     'listingType': listingType, 'country': country}">Apply</button>
     </div>
 </div>
+
+<!--(click)="applyFilter()"-->
