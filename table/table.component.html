@@ -1,4 +1,10 @@
+<list-of-page [totalPages] = "totalPages"></list-of-page>
 <div class="table flex-wrap">
-        <tile-comp *ngFor="let item of listings" class="flex-rows" [tile] = item></tile-comp>
+    <tile-comp *ngFor="let item of listings" class="flex-rows" [tile]=item></tile-comp>
 </div>
-<div>{{id}}</div>
+<list-of-page [totalPages] = "totalPages"></list-of-page>
+
+<div class="filter-popup" *ngIf="!statusTable && !networkProblem && !showLoading">Nothing found on your request
+</div>
+<div class="filter-popup" *ngIf=showLoading>Loading</div>
+<div class="filter-popup" *ngIf="networkProblem  && !showLoading">Network problem</div>

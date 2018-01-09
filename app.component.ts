@@ -17,15 +17,15 @@ export class AppComponent {
     // statusTable : boolean = true;
     // networkProblem : boolean = false;
     // listings: Listing[];
-    filterProp: IDataRequest;
+    // filterProp: IDataRequest;
 
 
     // constructor (private filterService : FilterService) {}
 
-    changedFilterProp(filterProp:IDataRequest) {
-        this.filterProp = filterProp;
-
-    }
+    // changedFilterProp(filterProp:IDataRequest) {
+    //     this.filterProp = filterProp;
+    //
+    // }
 
 
 }

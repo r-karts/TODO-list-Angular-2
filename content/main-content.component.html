@@ -1,9 +1,2 @@
 <filter-comp ></filter-comp>
-<list-of-page *ngIf="statusTable" ></list-of-page>
-<!--<table-comp [listings]=listings *ngIf="statusTable"></table-comp>-->
 <router-outlet></router-outlet>
-<!--<list-of-page (onChanged)="changePage($event)" *ngIf="statusTable"></list-of-page>-->
-<div class="filter-popup" *ngIf="!statusTable && !networkProblem && !showLoading">Nothing found on your request
-</div>
-<div class="filter-popup" *ngIf=showLoading>Loading</div>
-<div class="filter-popup" *ngIf="networkProblem  && !showLoading">Network problem</div>

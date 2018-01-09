@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { DataRequest } from '../NestoriaData';
 
 @Component({
     selector: 'list-of-page',
@@ -10,7 +9,7 @@ import { DataRequest } from '../NestoriaData';
 
 export class ListOfPages implements OnInit {
 
-    totalPages: number = 10;
+    @Input() totalPages: number = 0;
     currentPage: number = 1;
     middlePosition: boolean = false;
     leftmostPage: number;
@@ -19,7 +18,7 @@ export class ListOfPages implements OnInit {
     margin: number = 2;
     lengthList: number = 5;
 
-    private id: number;
+    private subscription: Subscription;
     private querySubscription: Subscription;
     private queryParam : any;
 
@@ -27,7 +26,10 @@ export class ListOfPages implements OnInit {
         private activateRoute: ActivatedRoute,
         private router: Router) {
         this.listCurrentPages = [];
-
+        this.subscription = activateRoute.params.subscribe((params) => {
+            this.currentPage = +params['id'];
+            this.changePage();
+        });
         this.querySubscription = activateRoute.queryParams.subscribe(
             (queryParam: any) => {
                 this.queryParam = queryParam;
@@ -37,43 +39,31 @@ export class ListOfPages implements OnInit {
     ngOnInit() {
         this.rangeFill(1, this.lengthList);
 
-        // this.activateRoute.params.subscribe(
-        //     (params: any) => {
-        //         this.id = params['id'];
-        //         console.log(this.id + ' <--');
-        //     });
     }
-
-    @Output() onChanged = new EventEmitter<{}>();
 
     clickOnPage(num: number) {
-        this.router.navigate(['/page', num],
-            {
-                queryParams: this.queryParam,
-            });
-        // console.log(this.queryParam);
+        this.router.navigate(['/page', num], {
+            queryParams: this.queryParam,
+        });
     }
 
-// делать через параметр в строке обновление листов строк или через сабджект
-    setPosition(position: number) {
-        this.currentPage = position;
+    changePage() {
+        console.log(typeof this.currentPage);
         this.listCurrentPages = [];
-
         this.middlePosition = (this.currentPage > this.margin &&
             this.currentPage < this.totalPages - this.margin);
 
         if (this.middlePosition) {
             this.leftmostPage = this.currentPage - this.margin;
             this.rightmostPage = this.currentPage + this.margin;
-            for (let i = this.leftmostPage; i <= this.rightmostPage; i += 1) {
-                this.listCurrentPages.push(i);
-            }
+            console.log(this.leftmostPage);
+            console.log(this.rightmostPage);
+            this.rangeFill(this.leftmostPage, this.rightmostPage);
         } else if (this.currentPage <= this.margin) {
             this.rangeFill(1, this.lengthList);
         } else {
             this.rangeFill(this.totalPages - this.lengthList, this.totalPages);
         }
-        this.onChanged.emit(this.currentPage);
     }
 
     rangeFill(begin: number, end: number) {
