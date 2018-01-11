@@ -26,16 +26,22 @@ export class TableComponent {
         this.queryParam = new DataRequest();
         this.subscription = activateRoute.params.subscribe((params) => {
             this.queryParam.page = params['id'];
+            this.statusTable = false;
+            this.showLoading = true;
+            this.networkProblem = false;
             this.requestData(this.queryParam);
         });
         this.querySubscription = activateRoute.queryParams.subscribe(
             (queryParam: any) => {
-                this.queryParam.action = queryParam['action'];
+                this.queryParam.action = queryParam['action'];  // !
                 this.queryParam.placeName = queryParam['placeName'];
                 this.queryParam.country = queryParam['country'];
                 this.queryParam.listingType = queryParam['listingType'];
                 this.queryParam.pretty = queryParam['pretty'];
                 this.requestData(this.queryParam);
+                this.statusTable = false;
+                this.showLoading = true;
+                this.networkProblem = false;
             });
     }
 

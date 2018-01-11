@@ -46,7 +46,7 @@ export class ListOfPages implements OnInit {
             queryParams: this.queryParam,
         });
     }
-
+ // фильтр избранное прокрутка попап хаты 
     changePage() {
         console.log(typeof this.currentPage);
         this.listCurrentPages = [];
