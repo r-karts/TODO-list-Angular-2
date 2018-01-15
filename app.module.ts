@@ -10,17 +10,19 @@ import { DataService } from './services/data.service';
 import { FilterService } from './services/filtres.service';
 import { ListOfPages } from './listOfPages/listOfPages.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MainContentComponent } from  './content/main-content.component';
+import { MainContentComponent } from './content/main-content.component';
+import { PopupHouseComponent } from  './popup house/popup-house.component';
 
-const appRoutes : Routes = [
-    { path : 'page/:id', component: TableComponent }];
+const appRoutes: Routes = [
+    { path: 'sale', component: TableComponent }];
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule,
         HttpClientModule, RouterModule.forRoot(appRoutes)],
-    declarations: [AppComponent, MainContentComponent, TableComponent,
+    declarations: [AppComponent, MainContentComponent, TableComponent, PopupHouseComponent,
         TileComponent, FilterComponent, ListOfPages],
-    providers : [DataService, FilterService],
-    bootstrap: [AppComponent]})
+    providers: [DataService, FilterService],
+    bootstrap: [AppComponent],
+})
 export class AppModule {
 }

@@ -87,3 +87,10 @@
     color: white;
     font-weight: 600;
 }
+.favorite {
+    position: absolute;
+    z-index: 20;
+    background: #ff6f62;
+    right: 0;
+    top: 31px;
+}

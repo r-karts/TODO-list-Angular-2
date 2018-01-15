@@ -1,15 +1,15 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-
+import {DataRequest, IDataLocalFilter, IDataRequest, IQueryParam} from '../NestoriaData';
+// фильтр избранное прокрутка попап хаты
 @Component({
     selector: 'list-of-page',
     templateUrl: 'src/app/listOfPages/listOfPages.component.html',
     styleUrls: ['src/app/listOfPages/listOfPages.component.css']})
 
-export class ListOfPages implements OnInit {
-
-    @Input() totalPages: number = 0;
+export class ListOfPages {
+    @Input() totalPages: number = 1;
     currentPage: number = 1;
     middlePosition: boolean = false;
     leftmostPage: number;
@@ -18,55 +18,62 @@ export class ListOfPages implements OnInit {
     margin: number = 2;
     lengthList: number = 5;
 
-    private subscription: Subscription;
+
     private querySubscription: Subscription;
-    private queryParam : any;
+    private queryParam : IDataRequest = <IDataRequest>{};
+    // private filterParam : IDataLocalFilter;
 
     constructor(
         private activateRoute: ActivatedRoute,
         private router: Router) {
+        // Object.defineProperties(this.queryParam, {
+        //     page: {
+        //         value : '',
+        //         writable: true,
+        //     },
+        // });
+
         this.listCurrentPages = [];
-        this.subscription = activateRoute.params.subscribe((params) => {
-            this.currentPage = +params['id'];
-            this.changePage();
-        });
+
         this.querySubscription = activateRoute.queryParams.subscribe(
-            (queryParam: any) => {
-                this.queryParam = queryParam;
+            (queryParam: IDataRequest) => {
+                this.currentPage = +queryParam.page;
+                this.changePage(this.currentPage);
+                Object.assign(this.queryParam, queryParam);
             });
     }
 
-    ngOnInit() {
-        this.rangeFill(1, this.lengthList);
-
-    }
-
     clickOnPage(num: number) {
-        this.router.navigate(['/page', num], {
+        this.queryParam.page = num.toString();
+        this.router.navigate(['/sale'], {
             queryParams: this.queryParam,
         });
     }
- // фильтр избранное прокрутка попап хаты 
-    changePage() {
-        console.log(typeof this.currentPage);
-        this.listCurrentPages = [];
-        this.middlePosition = (this.currentPage > this.margin &&
-            this.currentPage < this.totalPages - this.margin);
+    changePage(currentPage : number) {
+        console.log(this.totalPages + ' totalPages');
+        this.middlePosition = (currentPage > this.margin);
+            // &&
+            // currentPage < this.totalPages - this.margin);
 
         if (this.middlePosition) {
-            this.leftmostPage = this.currentPage - this.margin;
-            this.rightmostPage = this.currentPage + this.margin;
-            console.log(this.leftmostPage);
-            console.log(this.rightmostPage);
-            this.rangeFill(this.leftmostPage, this.rightmostPage);
-        } else if (this.currentPage <= this.margin) {
-            this.rangeFill(1, this.lengthList);
-        } else {
-            this.rangeFill(this.totalPages - this.lengthList, this.totalPages);
+            this.leftmostPage = currentPage - this.margin;
+            this.rightmostPage = currentPage + this.margin;
+
+            this.rangeFill(this.leftmostPage, this.rightmostPage, 'middle');
+            return;
         }
+        if (currentPage <= this.margin) {
+            this.rangeFill(1, this.lengthList, ' first');
+            return;
+        }
+        // if (currentPage >= this.totalPages - this.margin) {
+        //     this.rangeFill(this.totalPages - this.lengthList, this.totalPages, 'last');
+        // }
     }
 
-    rangeFill(begin: number, end: number) {
+    rangeFill(begin: number, end: number, message: string) {
+        this.listCurrentPages = [];
+        console.log(begin + ' ' + end);
         for (let i = begin; i <= end; i += 1) {
             this.listCurrentPages.push(i);
         }

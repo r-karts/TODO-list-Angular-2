@@ -45,7 +45,12 @@ export interface INestoria {
     response : IDataResponse;
 }
 
-export interface IDataRequest {
+export interface IQueryParam {
+    bathroom : string;
+    bedroom : string;
+    priceMin : string;
+    priceMax : string;
+
     country: string;
     pretty: string;
     placeName : string;
@@ -54,20 +59,52 @@ export interface IDataRequest {
     page : string;
 }
 
-export class DataRequest implements IDataRequest {
+
+export interface IDataLocalFilter {
+    bathroom : string;
+    bedroom : string;
+    priceMin : string;
+    priceMax : string;
+}
+
+export interface IDataRequest {
     country: string;
     pretty: string;
     placeName : string;
     listingType : string;
     action : string;
     page : string;
-    constructor() {
-        this.country = '';
-        this.action = '';
-        this.placeName = '';
-        this.listingType = '';
-        this.pretty = '';
-        this.page = '';
+    bathroomMin? : string;
+    bathroomMax? : string;
+    bedroomMin? : string;
+    bedroomMax? : string;
+    priceMin? : string;
+    priceMax? : string;
+
+}
+
+export class DataRequest implements IDataRequest {
+    country: string;
+    pretty: string;
+    placeName : string;
+    listingType : string;
+    writable : true;
+    action : string;
+    page : string;
+    bathroomMin : string;
+    bathroomMax : string;
+    bedroomMin : string;
+    bedroomMax : string;
+    priceMin : string;
+    priceMax : string;
+    constructor (country: string, pretty: string, placeName : string,
+                 listingType : string,action : string,page : string) {
+        this.country = country;
+        this.placeName = placeName;
+        this.page = page;
+        this.action = action;
+        this.pretty = pretty;
+        this.listingType = listingType;
     }
 }
 

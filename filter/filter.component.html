@@ -4,9 +4,22 @@
         <input type="text" class="place-filter" placeholder="country" [(ngModel)] = country id="country">
         <label for="place">Place</label>
         <input type="text" class="place-filter" placeholder="place" [(ngModel)] = placeName id="place">
-        <button class="apply-filter" [routerLink]="['page', '1']" [queryParams]="{'pretty': pretty, 'action': action, 'placeName': placeName,
-                                                     'listingType': listingType, 'country': country}">Apply</button>
+        <button class="apply-filter" [routerLink]="['/sale']" [queryParams]="{'pretty': pretty, 'action': action, 'placeName': placeName,
+                                                     'listingType': listingType, 'country': country, 'page' : 1}">Search</button>
+    </div>
+    <div class="second-filter">
+        <label>Min bathroom - </label>
+        <input type="text" [(ngModel)] = bathroomMin>
+        <label>Max bathroom - </label>
+        <input type="text" [(ngModel)] = bathroomMax>
+        <label>Min bedroom - </label>
+        <input type="text" [(ngModel)] = bedroomMin>
+        <label>Max bedroom - </label>
+        <input type="text" [(ngModel)] = bedroomMax>
+        <label>Min price - </label>
+        <input type="text" [(ngModel)] = priceMin>
+        <label>Max price - </label>
+        <input type="text" [(ngModel)] = priceMax>
+        <button class="apply-filter" (click)="applyFilter()">Apply filter</button>
     </div>
 </div>
-
-<!--(click)="applyFilter()"-->

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataRequest, IDataResponse, INestoria, Listing } from '../NestoriaData';
+import { IDataRequest, IDataResponse, INestoria, Listing } from '../NestoriaData';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FilterService } from '../services/filtres.service';
@@ -12,40 +12,33 @@ import { FilterService } from '../services/filtres.service';
 export class TableComponent {
 
     listings: Listing[];
-    private subscription: Subscription;
-    private queryParam: DataRequest;
+    selectTile: Listing;
     private querySubscription: Subscription;
-    private totalPages : number = 0;
-    private currentPage : number = 0;
+    public totalPages: number = 0;
+    private currentPage: number = 0;
+    private dataRequest: IDataRequest;
+
+    hiddenPopup: boolean = true;
 
     showLoading: boolean = false;
     statusTable: boolean = true;
     networkProblem: boolean = false;
 
     constructor(private activateRoute: ActivatedRoute, private filterService: FilterService) {
-        this.queryParam = new DataRequest();
-        this.subscription = activateRoute.params.subscribe((params) => {
-            this.queryParam.page = params['id'];
-            this.statusTable = false;
-            this.showLoading = true;
-            this.networkProblem = false;
-            this.requestData(this.queryParam);
-        });
+
         this.querySubscription = activateRoute.queryParams.subscribe(
-            (queryParam: any) => {
-                this.queryParam.action = queryParam['action'];  // !
-                this.queryParam.placeName = queryParam['placeName'];
-                this.queryParam.country = queryParam['country'];
-                this.queryParam.listingType = queryParam['listingType'];
-                this.queryParam.pretty = queryParam['pretty'];
-                this.requestData(this.queryParam);
+            (queryParam: IDataRequest) => {
+                this.dataRequest = queryParam;
+                console.log(queryParam);
+                this.requestData(this.dataRequest);
                 this.statusTable = false;
                 this.showLoading = true;
                 this.networkProblem = false;
             });
     }
 
-    requestData(dataRequest: DataRequest) {
+    requestData(dataRequest: IDataRequest) {
+        console.log('REQUEST DATA');
         this.filterService.setParams(dataRequest).map((data: INestoria) => data.response)
             .subscribe((resp: IDataResponse) => {
                 this.showLoading = false;
@@ -63,4 +56,9 @@ export class TableComponent {
 
     }
 
+    onChanged(tile: Listing) {
+        this.selectTile = tile;
+        this.hiddenPopup = false;
+
+    }
 }
