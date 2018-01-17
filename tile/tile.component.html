@@ -1,9 +1,9 @@
-
 <div class="tile-title">{{tile.title}}</div>
-<div class="favorite" (click)="addToFavorite()">[ {{inFavorite}} ]</div>
+<div class="favorite" (click)="clickToFavorite()">
+    <img *ngIf="inFavorite" src="/src/img/check.png" alt="check">
+</div>
 <div class="wrap-tile-image" (click)="clickToImage()"><img class="tile-image" [src]="tile.img_url" alt=""></div>
 <div class="prise-side">{{tile.price_formatted}}</div>
 <div class="description-side">
     <div class="text-wrap"><span>{{tile.summary}}</span></div>
 </div>
-<div>{{value}}</div>

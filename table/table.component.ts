@@ -59,6 +59,9 @@ export class TableComponent {
     onChanged(tile: Listing) {
         this.selectTile = tile;
         this.hiddenPopup = false;
+    }
 
+    showFavoriteTile() {
+        this.listings = JSON.parse(localStorage.getItem('favoriteList'));
     }
 }

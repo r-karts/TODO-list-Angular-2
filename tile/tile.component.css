@@ -89,8 +89,11 @@
 }
 .favorite {
     position: absolute;
-    z-index: 20;
-    background: #ff6f62;
+    z-index: 10;
+    width: 20px;
+    height: 20px;
+    background: #c8e3ff;
+    border: 1px solid darkslategray;
     right: 0;
     top: 31px;
 }

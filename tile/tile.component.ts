@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Listing } from '../NestoriaData';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'tile-comp',
@@ -8,38 +9,25 @@ import { Listing } from '../NestoriaData';
 })
 export class TileComponent implements OnInit {
     @Input() tile: Listing;
-    value : string = 'hello';
-    // clickOnTile : boolean = false;
     @Output() onChanged = new EventEmitter<Listing>();
-
     inFavorite: boolean = false;
     list: Listing[] = [];
 
     ngOnInit() {
         this.list = JSON.parse(localStorage.getItem('favoriteList'));
         if (this.list) {
-            console.log(this.list);
-            if (this.list.indexOf(this.tile, 0) !== -1)
+            if (this.indexItemInList(this.list, this.tile) !== -1)
                 this.inFavorite = true;
-            console.log(' ngOnInit list exist, inFavorite - ' + this.inFavorite);
-        } else {
-            this.inFavorite = false;
-            console.log(' ngOnInit list not exist');
         }
-    } // indexOf не работает с объектами
+    }
 
-    addToFavorite() {
+    clickToFavorite() {
         if (this.inFavorite) {
-            console.log('_____');
             this.list = JSON.parse(localStorage.getItem('favoriteList'));
-            console.log(this.list);
-            console.log(this.list.indexOf(this.tile, 0));
-
-            // this.list.splice(this.list.indexOf(this.tile, 0), 1);
-            // localStorage.setItem('favoriteList', JSON.stringify(this.list));
-            // this.inFavorite = false;
+            this.list.splice(this.indexItemInList(this.list, this.tile), 1);
+            localStorage.setItem('favoriteList', JSON.stringify(this.list));
+            this.inFavorite = false;
         } else {
-            console.log('AddTOFavorite ');
             this.list = JSON.parse(localStorage.getItem('favoriteList'));
             if (!this.list) {
                 this.list = [];
@@ -52,6 +40,17 @@ export class TileComponent implements OnInit {
 
     clickToImage() {
         this.onChanged.emit(this.tile);
+    }
+
+    indexItemInList(list : Listing[], item : Listing) : number {
+        let exist = -1;
+        list.forEach((value, index) => {
+            if (_.isEqual(value, item)) {
+                exist = index;
+                return exist;
+            }
+        });
+        return exist;
     }
 
 }

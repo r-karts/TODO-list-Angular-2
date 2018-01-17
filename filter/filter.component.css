@@ -1,7 +1,7 @@
 input {
     text-decoration: none;
     border: none;
-    font-size: 20px;
+    font-size: 13px;
     background: #ccdae2;
     margin-left: 10px;
     padding: 0 10px;
@@ -24,3 +24,52 @@ button {
     font-size: 19px;
     border-bottom: 1px solid #1c6686;
 }
+
+#country {
+    width : 40px;
+}
+
+.second-filter {
+    position: fixed;
+    z-index: 11;
+    background: #487aa4eb;
+    padding-right: 16px;
+    font-size: 15px;
+}
+
+.second-filter input {
+    width: 60px;
+}
+
+.second-filter label {
+    font-size: 12px;
+}
+.second-filter span {
+    font-size: 12px;
+}
+
+.wrap-input {
+    position: relative;
+    display : inline-block;
+}
+
+
+.error-popup:after {
+    content: attr(errMsg);
+    position: absolute;
+    border : 1px solid #ff3c41;
+    background-color: #fff;
+    font-weight: 600;
+    color: #ff3c41;
+    border-radius: 10px;
+    z-index: 12;
+    width: 200px;
+    padding: 5px;
+    margin-top: 9px;
+    margin-left : 10px;
+}
+
+#country.ng-touched.ng-invalid {border:solid red 2px;}
+#country.ng-touched.ng-valid {border:solid green 2px;}
+#place.ng-touched.ng-invalid {border:solid red 2px;}
+#place.ng-touched.ng-valid {border:solid green 2px;}

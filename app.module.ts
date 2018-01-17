@@ -12,6 +12,7 @@ import { ListOfPages } from './listOfPages/listOfPages.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainContentComponent } from './content/main-content.component';
 import { PopupHouseComponent } from  './popup house/popup-house.component';
+import { ErrorPopupDirective } from './directives/popup error/error-popup.directive';
 
 const appRoutes: Routes = [
     { path: 'sale', component: TableComponent }];
@@ -20,7 +21,7 @@ const appRoutes: Routes = [
     imports: [BrowserModule, FormsModule, ReactiveFormsModule,
         HttpClientModule, RouterModule.forRoot(appRoutes)],
     declarations: [AppComponent, MainContentComponent, TableComponent, PopupHouseComponent,
-        TileComponent, FilterComponent, ListOfPages],
+        TileComponent, FilterComponent, ListOfPages, ErrorPopupDirective],
     providers: [DataService, FilterService],
     bootstrap: [AppComponent],
 })

@@ -1,9 +1,6 @@
-import { Component } from '@angular/core';
-import { FilterService } from './services/filtres.service';
-import { Listing, IDataRequest, IDataResponse, INestoria } from './NestoriaData';
-import { Subject } from 'rxjs/Subject';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, HostListener } from '@angular/core';
+import { Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
     selector: 'purchase-app',
@@ -11,21 +8,29 @@ import { Subscription } from 'rxjs/Subscription';
     styleUrls: ['src/app/app.component.css']})
 export class AppComponent {
 
+    constructor(@Inject(DOCUMENT) private document: Document) {
+    }
 
+    navIsFixed: boolean = false;
 
-    // showLoading : boolean = false;
-    // statusTable : boolean = true;
-    // networkProblem : boolean = false;
-    // listings: Listing[];
-    // filterProp: IDataRequest;
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        const number = window.pageYOffset ||
+            this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+        if (number > 200) {
+            this.navIsFixed = true;
+        } else if (this.navIsFixed && number < 10) {
+            this.navIsFixed = false;
+        }
+    }
+    scrollToTop() {
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+    }
 
-
-    // constructor (private filterService : FilterService) {}
-
-    // changedFilterProp(filterProp:IDataRequest) {
-    //     this.filterProp = filterProp;
-    //
-    // }
 
 
 }

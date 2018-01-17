@@ -1,17 +1,13 @@
-<!--<filter-for-table></filter-for-table>-->
+<div class="favorite" (click)="showFavoriteTile()">Favorite</div>
 <list-of-page [totalPages]="totalPages" *ngIf="statusTable && !networkProblem && !showLoading"></list-of-page>
 <div class="table flex-wrap" *ngIf="statusTable && !networkProblem && !showLoading">
     <tile-comp *ngFor="let item of listings" class="flex-rows" [tile]=item (onChanged)="onChanged($event)"></tile-comp>
 </div>
-<tile-comp></tile-comp>
-<!--(onChanged)="onChanged($event)"-->
 <list-of-page [totalPages]="totalPages" *ngIf="statusTable && !networkProblem && !showLoading"></list-of-page>
 <div class="filter-popup" *ngIf="!statusTable && !networkProblem && !showLoading">Nothing found on your request
 </div>
 <div class="filter-popup" *ngIf=showLoading>Loading</div>
 <div class="filter-popup" *ngIf="networkProblem  && !showLoading">Network problem</div>
-<!--todo wtf-->
-
 <div class="item-popup" [hidden]="hiddenPopup">
     <div class="exit-popup" (click)="hiddenPopup = !hiddenPopup">[X]</div>
     <popup-house [tile]="selectTile"></popup-house>

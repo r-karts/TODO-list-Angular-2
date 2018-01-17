@@ -1,25 +1,28 @@
 <div class="wrap-search">
-    <div class="filters">
+    <form [formGroup]="searchForm" class="filters">
+        <input type="radio" name="listType" value="buy" checked formControlName="listType"><label>For buy</label>
+        <input type="radio" name="listType" value="rent" formControlName="listType"><label>For rent</label>
         <label for="country">Country</label>
-        <input type="text" class="place-filter" placeholder="country" [(ngModel)] = country id="country">
+        <div class="wrap-input" [class.error-popup] = "searchForm.get('country').invalid && searchForm.get('country').touched" [attr.errMsg]="errMsgCountry" [errorPopup]="searchForm.get('country').invalid && searchForm.get('country').touched">
+            <input type="text" class="place-filter" formControlName="country" id="country"></div>
         <label for="place">Place</label>
-        <input type="text" class="place-filter" placeholder="place" [(ngModel)] = placeName id="place">
-        <button class="apply-filter" [routerLink]="['/sale']" [queryParams]="{'pretty': pretty, 'action': action, 'placeName': placeName,
-                                                     'listingType': listingType, 'country': country, 'page' : 1}">Search</button>
-    </div>
-    <div class="second-filter">
-        <label>Min bathroom - </label>
-        <input type="text" [(ngModel)] = bathroomMin>
-        <label>Max bathroom - </label>
-        <input type="text" [(ngModel)] = bathroomMax>
-        <label>Min bedroom - </label>
-        <input type="text" [(ngModel)] = bedroomMin>
-        <label>Max bedroom - </label>
-        <input type="text" [(ngModel)] = bedroomMax>
-        <label>Min price - </label>
-        <input type="text" [(ngModel)] = priceMin>
-        <label>Max price - </label>
-        <input type="text" [(ngModel)] = priceMax>
-        <button class="apply-filter" (click)="applyFilter()">Apply filter</button>
-    </div>
+        <div class="wrap-input" [class.error-popup] = "searchForm.get('place').invalid && searchForm.get('place').touched" [attr.errMsg]="errMsgPlace" [errorPopup]="searchForm.get('place').invalid">
+            <input type="text" class="place-filter" formControlName="place" id="place"></div>
+        <button class="apply-filter" [disabled]="searchForm.get('country').invalid ||
+        searchForm.get('place').invalid || searchForm.get('listType').invalid" (click)="applySearch()">Search
+        </button>
+    </form>
+    <input type="checkbox" name="displayFilter" value="Show Filter">
+    <form class="second-filter" [formGroup]="filterForm">
+        <label>BATHROOM</label><br>
+        <span>Min</span><input type="text" name="bathroomMin" formControlName="bathMin">
+        <span>Max</span><input type="text" name="bathroomMax" formControlName="bathMax">
+        <br><label>BEDROOM</label><br>
+        <span>Min</span><input type="text" name="bedroomMin" formControlName="bedMin">
+        <span>Max</span><input type="text" name="bedroomMax" formControlName="bedMax">
+        <br><label>PRICE</label><br>
+        <span>Min</span><input type="text" name="priceMin" formControlName="priceMin">
+        <span>Max</span><input type="text" name="priceMax" formControlName="priceMax">
+        <br><button class="apply-filter" (click)="applyFilter()">Apply filter</button>
+    </form>
 </div>
