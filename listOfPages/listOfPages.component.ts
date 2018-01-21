@@ -1,15 +1,17 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import {DataRequest, IDataLocalFilter, IDataRequest, IQueryParam} from '../NestoriaData';
-// фильтр избранное прокрутка попап хаты
+import { IDataRequest } from '../NestoriaData';
+
 @Component({
     selector: 'list-of-page',
     templateUrl: 'src/app/listOfPages/listOfPages.component.html',
-    styleUrls: ['src/app/listOfPages/listOfPages.component.css']})
+    styleUrls: ['src/app/listOfPages/listOfPages.component.css'],
+})
 
 export class ListOfPages {
-    @Input() totalPages: number = 1;
+    @Input() totalPages: number = 1; // totalPages хоть и передаю в компонент но
+    // он всё равно при загрузке уходит  ноль ни ебу почему, поэтому тут костыль есть
     currentPage: number = 1;
     middlePosition: boolean = false;
     leftmostPage: number;
@@ -20,12 +22,12 @@ export class ListOfPages {
 
 
     private querySubscription: Subscription;
-    private queryParam : IDataRequest = <IDataRequest>{};
+    private queryParam: IDataRequest = <IDataRequest>{};
+
     // private filterParam : IDataLocalFilter;
 
-    constructor(
-        private activateRoute: ActivatedRoute,
-        private router: Router) {
+    constructor(private activateRoute: ActivatedRoute,
+                private router: Router) {
         // Object.defineProperties(this.queryParam, {
         //     page: {
         //         value : '',
@@ -49,21 +51,21 @@ export class ListOfPages {
             queryParams: this.queryParam,
         });
     }
-    changePage(currentPage : number) {
-        console.log(this.totalPages + ' totalPages');
+
+    changePage(currentPage: number) {
         this.middlePosition = (currentPage > this.margin);
-            // &&
-            // currentPage < this.totalPages - this.margin);
+        // &&
+        // currentPage < this.totalPages - this.margin);
 
         if (this.middlePosition) {
             this.leftmostPage = currentPage - this.margin;
             this.rightmostPage = currentPage + this.margin;
 
-            this.rangeFill(this.leftmostPage, this.rightmostPage, 'middle');
+            this.rangeFill(this.leftmostPage, this.rightmostPage);
             return;
         }
         if (currentPage <= this.margin) {
-            this.rangeFill(1, this.lengthList, ' first');
+            this.rangeFill(1, this.lengthList);
             return;
         }
         // if (currentPage >= this.totalPages - this.margin) {
@@ -71,9 +73,8 @@ export class ListOfPages {
         // }
     }
 
-    rangeFill(begin: number, end: number, message: string) {
+    rangeFill(begin: number, end: number) {
         this.listCurrentPages = [];
-        console.log(begin + ' ' + end);
         for (let i = begin; i <= end; i += 1) {
             this.listCurrentPages.push(i);
         }

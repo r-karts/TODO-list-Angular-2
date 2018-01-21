@@ -9,17 +9,15 @@ import { FilterComponent } from './filter/filter.component';
 import { DataService } from './services/data.service';
 import { FilterService } from './services/filtres.service';
 import { ListOfPages } from './listOfPages/listOfPages.component';
-import { RouterModule, Routes } from '@angular/router';
 import { MainContentComponent } from './content/main-content.component';
-import { PopupHouseComponent } from  './popup house/popup-house.component';
+import { PopupHouseComponent } from './popup house/popup-house.component';
 import { ErrorPopupDirective } from './directives/popup error/error-popup.directive';
+import { routing } from './app.routing';
 
-const appRoutes: Routes = [
-    { path: 'sale', component: TableComponent }];
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule,
-        HttpClientModule, RouterModule.forRoot(appRoutes)],
+        HttpClientModule, routing],
     declarations: [AppComponent, MainContentComponent, TableComponent, PopupHouseComponent,
         TileComponent, FilterComponent, ListOfPages, ErrorPopupDirective],
     providers: [DataService, FilterService],

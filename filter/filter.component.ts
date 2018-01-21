@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { DataRequest, IDataRequest } from '../NestoriaData';
+import { Component } from '@angular/core';
+import { IDataRequest } from '../NestoriaData';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -48,6 +48,7 @@ export class FilterComponent {
         this.filterProp.listingType = this.listingType;
         this.filterProp.pretty = this.pretty;
         this.filterProp.page = '1';
+        //  кроме If ни чего лучше не придумал что бы не кидать пустые переменные в строку запроса
         if (this.filterForm.get('priceMin').value)
             this.filterProp.priceMin = this.filterForm.get('priceMin').value;
         if (this.filterForm.get('priceMax').value)

@@ -1,11 +1,11 @@
-import { Component, HostListener } from '@angular/core';
-import { Inject } from '@angular/core';
+import { Component, HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
     selector: 'purchase-app',
     templateUrl: 'src/app/app.component.html',
-    styleUrls: ['src/app/app.component.css']})
+    styleUrls: ['src/app/app.component.css'],
+})
 export class AppComponent {
 
     constructor(@Inject(DOCUMENT) private document: Document) {
@@ -23,6 +23,7 @@ export class AppComponent {
             this.navIsFixed = false;
         }
     }
+
     scrollToTop() {
         window.scroll({
             top: 0,
@@ -30,7 +31,6 @@ export class AppComponent {
             behavior: 'smooth',
         });
     }
-
 
 
 }

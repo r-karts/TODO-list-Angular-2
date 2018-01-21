@@ -1,11 +1,3 @@
-// export class NestoriaData {
-//     listings: Listing[];
-//     constructor(list: Listing[]) {
-//         this.listings = list;
-//     }
-// }
-
-
 export interface Listing {
     bathroom_number: any;
     bedroom_number: number;
@@ -41,72 +33,26 @@ export interface Listing {
 }
 
 export interface INestoria {
-    request : IDataRequest;
-    response : IDataResponse;
-}
-
-export interface IQueryParam {
-    bathroom : string;
-    bedroom : string;
-    priceMin : string;
-    priceMax : string;
-
-    country: string;
-    pretty: string;
-    placeName : string;
-    listingType : string;
-    action : string;
-    page : string;
-}
-
-
-export interface IDataLocalFilter {
-    bathroom : string;
-    bedroom : string;
-    priceMin : string;
-    priceMax : string;
+    request: IDataRequest;
+    response: IDataResponse;
 }
 
 export interface IDataRequest {
     country: string;
     pretty: string;
-    placeName : string;
-    listingType : string;
-    action : string;
-    page : string;
-    bathroomMin? : string;
-    bathroomMax? : string;
-    bedroomMin? : string;
-    bedroomMax? : string;
-    priceMin? : string;
-    priceMax? : string;
+    placeName: string;
+    listingType: string;
+    action: string;
+    page: string;
+    bathroomMin?: string;
+    bathroomMax?: string;
+    bedroomMin?: string;
+    bedroomMax?: string;
+    priceMin?: string;
+    priceMax?: string;
 
 }
 
-export class DataRequest implements IDataRequest {
-    country: string;
-    pretty: string;
-    placeName : string;
-    listingType : string;
-    writable : true;
-    action : string;
-    page : string;
-    bathroomMin : string;
-    bathroomMax : string;
-    bedroomMin : string;
-    bedroomMax : string;
-    priceMin : string;
-    priceMax : string;
-    constructor (country: string, pretty: string, placeName : string,
-                 listingType : string,action : string,page : string) {
-        this.country = country;
-        this.placeName = placeName;
-        this.page = page;
-        this.action = action;
-        this.pretty = pretty;
-        this.listingType = listingType;
-    }
-}
 
 export interface Attribution {
     img_height: number;

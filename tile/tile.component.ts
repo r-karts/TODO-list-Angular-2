@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Listing } from '../NestoriaData';
 import * as _ from 'lodash';
 
@@ -42,7 +42,7 @@ export class TileComponent implements OnInit {
         this.onChanged.emit(this.tile);
     }
 
-    indexItemInList(list : Listing[], item : Listing) : number {
+    indexItemInList(list: Listing[], item: Listing): number {
         let exist = -1;
         list.forEach((value, index) => {
             if (_.isEqual(value, item)) {
