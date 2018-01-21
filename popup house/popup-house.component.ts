@@ -9,4 +9,5 @@ import { Listing } from '../NestoriaData';
 export class PopupHouseComponent {
     @Input() tile: Listing = <Listing>{};
 
+
 }
